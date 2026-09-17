@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voter ID Practical Training</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">Digital<span>Seva</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="aadhaar.html">Aadhaar</a>
+    <a href="pan.html">PAN</a>
+    <a href="voter.html">Voter ID</a>
+  </nav>
+</header>
+
+<main class="form-page">
+
+  <div class="form-box">
+    <div class="icon big">🗳️</div>
+    <h1>Voter ID Practical Training</h1>
+    <p class="subtitle">Demo environment — use dummy information only.</p>
+
+    <label>Dummy Voter ID</label>
+    <div class="input-row">
+      <input id="voterNumber" readonly>
+      <button type="button" onclick="generateVoter()">Generate</button>
+    </div>
+
+    <label>Dummy Mobile Number</label>
+    <div class="input-row">
+      <input id="mobile" readonly>
+      <button type="button" onclick="generateMobile()">Generate</button>
+    </div>
+
+    <button class="primary" onclick="sendOTP()">Generate Demo OTP</button>
+
+    <div id="otpBox" class="otp-box hidden">
+      <p>Your demo OTP is:</p>
+      <strong id="otpDisplay"></strong>
+
+      <label>Enter Demo OTP</label>
+      <input id="otpInput" maxlength="6" inputmode="numeric">
+
+      <button class="primary" onclick="verifyOTP()">Verify OTP</button>
+    </div>
+
+    <div id="result" class="result"></div>
+
+    <a class="back" href="index.html">← Back to Training Home</a>
+  </div>
+
+</main>
+
+<script src="script.js"></script>
+<script>
+  let currentOTP = "";
+
+  function generateVoter() {
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let voter = "";
+
+    voter += letters[Math.floor(Math.random() * letters.length)];
+    voter += letters[Math.floor(Math.random() * letters.length)];
+
+    for (let i = 0; i < 7; i++) {
+      voter += Math.floor(Math.random() * 10);
+    }
+
+    document.getElementById("voterNumber").value = voter;
+  }
+
+  function sendOTP() {
+    if (!document.getElementById("voterNumber").value ||
+        !document.getElementById("mobile").value) {
+      alert("First generate the dummy Voter ID and mobile number.");
+      return;
+    }
+
+    currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+    document.getElementById("otpDisplay").textContent = currentOTP;
+    document.getElementById("otpBox").classList.remove("hidden");
+  }
+
+  function verifyOTP() {
+    const entered = document.getElementById("otpInput").value;
+    const result = document.getElementById("result");
+
+    if (entered === currentOTP) {
+      result.innerHTML =
+        "✅ Demo OTP verified successfully.<br><br>" +
+        "<a href='permission.html'>Continue to Permission →</a>";
+      result.className = "result success";
+    } else {
+      result.textContent = "❌ Invalid demo OTP.";
+      result.className = "result error";
+    }
+  }
+</script>
+
+</body>
+</html>
