@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Permission Training</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">Digital<span>Seva</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="aadhaar.html">Aadhaar</a>
+    <a href="pan.html">PAN</a>
+    <a href="voter.html">Voter ID</a>
+  </nav>
+</header>
+
+<main class="form-page">
+
+  <div class="form-box">
+    <div class="icon big">🔐</div>
+
+    <h1>Permission Practice</h1>
+
+    <p class="subtitle">
+      This is a training simulation. No real government account or
+      identity verification is performed.
+    </p>
+
+    <div class="permission-card">
+      <h3>Training Permission</h3>
+      <p>
+        I understand that this is a demo environment and that all
+        generated information is fictional.
+      </p>
+
+      <label class="checkbox">
+        <input type="checkbox" id="permission">
+        I agree to continue with the practical training.
+      </label>
+    </div>
+
+    <button class="primary" onclick="continueTraining()">
+      Continue Practical Training
+    </button>
+
+    <div id="permissionResult" class="result"></div>
+
+    <a class="back" href="index.html">← Back to Training Home</a>
+  </div>
+
+</main>
+
+<script>
+function continueTraining() {
+  const checked = document.getElementById("permission").checked;
+  const result = document.getElementById("permissionResult");
+
+  if (!checked) {
+    result.textContent = "Please accept the training permission first.";
+    result.className = "result error";
+    return;
+  }
+
+  result.textContent = "✅ Permission accepted. Practical training unlocked.";
+  result.className = "result success";
+}
+</script>
+
+</body>
+</html>
